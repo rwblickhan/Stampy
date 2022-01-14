@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		CD92A5B1278FE8C700DD3238 /* ButtonupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5B0278FE8C700DD3238 /* ButtonupApp.swift */; };
-		CD92A5B3278FE8C700DD3238 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5B2278FE8C700DD3238 /* ContentView.swift */; };
 		CD92A5B5278FE8C900DD3238 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD92A5B4278FE8C900DD3238 /* Assets.xcassets */; };
 		CD92A5B8278FE8C900DD3238 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD92A5B7278FE8C900DD3238 /* Preview Assets.xcassets */; };
 		CD92A5C2278FE8C900DD3238 /* ButtonupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5C1278FE8C900DD3238 /* ButtonupTests.swift */; };
 		CD92A5CC278FE8C900DD3238 /* ButtonupUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5CB278FE8C900DD3238 /* ButtonupUITests.swift */; };
 		CD92A5CE278FE8C900DD3238 /* ButtonupUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5CD278FE8C900DD3238 /* ButtonupUITestsLaunchTests.swift */; };
+		CD92A5DC278FE92A00DD3238 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CD92A5DB278FE92A00DD3238 /* Realm */; };
+		CD92A5DE278FE92A00DD3238 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CD92A5DD278FE92A00DD3238 /* RealmSwift */; };
+		CD92A5E1278FE94C00DD3238 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5E0278FE94C00DD3238 /* Email.swift */; };
+		CD92A5E3278FEB0E00DD3238 /* EmailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5E2278FEB0E00DD3238 /* EmailRepository.swift */; };
+		CD92A5E5278FED8000DD3238 /* EmailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5E4278FED8000DD3238 /* EmailsView.swift */; };
+		CD92A5E7278FF09000DD3238 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5E6278FF09000DD3238 /* APIClient.swift */; };
+		CD92A5E92791340100DD3238 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5E82791340100DD3238 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +42,6 @@
 /* Begin PBXFileReference section */
 		CD92A5AD278FE8C700DD3238 /* Buttonup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Buttonup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD92A5B0278FE8C700DD3238 /* ButtonupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonupApp.swift; sourceTree = "<group>"; };
-		CD92A5B2278FE8C700DD3238 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CD92A5B4278FE8C900DD3238 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD92A5B7278FE8C900DD3238 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CD92A5BD278FE8C900DD3238 /* ButtonupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ButtonupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +49,11 @@
 		CD92A5C7278FE8C900DD3238 /* ButtonupUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ButtonupUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD92A5CB278FE8C900DD3238 /* ButtonupUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonupUITests.swift; sourceTree = "<group>"; };
 		CD92A5CD278FE8C900DD3238 /* ButtonupUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonupUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CD92A5E0278FE94C00DD3238 /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
+		CD92A5E2278FEB0E00DD3238 /* EmailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRepository.swift; sourceTree = "<group>"; };
+		CD92A5E4278FED8000DD3238 /* EmailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailsView.swift; sourceTree = "<group>"; };
+		CD92A5E6278FF09000DD3238 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		CD92A5E82791340100DD3238 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD92A5DE278FE92A00DD3238 /* RealmSwift in Frameworks */,
+				CD92A5DC278FE92A00DD3238 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,9 +107,13 @@
 			isa = PBXGroup;
 			children = (
 				CD92A5B0278FE8C700DD3238 /* ButtonupApp.swift */,
-				CD92A5B2278FE8C700DD3238 /* ContentView.swift */,
 				CD92A5B4278FE8C900DD3238 /* Assets.xcassets */,
 				CD92A5B6278FE8C900DD3238 /* Preview Content */,
+				CD92A5E0278FE94C00DD3238 /* Email.swift */,
+				CD92A5E82791340100DD3238 /* SettingsView.swift */,
+				CD92A5E2278FEB0E00DD3238 /* EmailRepository.swift */,
+				CD92A5E4278FED8000DD3238 /* EmailsView.swift */,
+				CD92A5E6278FF09000DD3238 /* APIClient.swift */,
 			);
 			path = Buttonup;
 			sourceTree = "<group>";
@@ -143,6 +159,10 @@
 			dependencies = (
 			);
 			name = Buttonup;
+			packageProductDependencies = (
+				CD92A5DB278FE92A00DD3238 /* Realm */,
+				CD92A5DD278FE92A00DD3238 /* RealmSwift */,
+			);
 			productName = Buttonup;
 			productReference = CD92A5AD278FE8C700DD3238 /* Buttonup.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +235,9 @@
 				Base,
 			);
 			mainGroup = CD92A5A4278FE8C700DD3238;
+			packageReferences = (
+				CD92A5DA278FE92A00DD3238 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = CD92A5AE278FE8C700DD3238 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -257,8 +280,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD92A5B3278FE8C700DD3238 /* ContentView.swift in Sources */,
+				CD92A5E3278FEB0E00DD3238 /* EmailRepository.swift in Sources */,
+				CD92A5E5278FED8000DD3238 /* EmailsView.swift in Sources */,
 				CD92A5B1278FE8C700DD3238 /* ButtonupApp.swift in Sources */,
+				CD92A5E92791340100DD3238 /* SettingsView.swift in Sources */,
+				CD92A5E7278FF09000DD3238 /* APIClient.swift in Sources */,
+				CD92A5E1278FE94C00DD3238 /* Email.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +612,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CD92A5DA278FE92A00DD3238 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.19.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CD92A5DB278FE92A00DD3238 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD92A5DA278FE92A00DD3238 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		CD92A5DD278FE92A00DD3238 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD92A5DA278FE92A00DD3238 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CD92A5A5278FE8C700DD3238 /* Project object */;
 }

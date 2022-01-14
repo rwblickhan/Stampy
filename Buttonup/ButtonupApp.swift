@@ -11,7 +11,18 @@ import SwiftUI
 struct ButtonupApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                EmailsView()
+                    .tabItem {
+                        Image(systemName: "envelope")
+                        Text("Emails")
+                    }
+                SettingsView()
+                    .tabItem {
+                        Image(systemName: "gear")
+                        Text("Settings")
+                    }
+            }
         }
     }
 }

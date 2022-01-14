@@ -9,7 +9,7 @@ import Combine
 import Foundation
 import RealmSwift
 
-fileprivate struct EmailListResponse: Codable {
+private struct EmailListResponse: Codable {
     let results: [Email]
     let next: String?
     let previous: String?
@@ -17,7 +17,7 @@ fileprivate struct EmailListResponse: Codable {
 }
 
 /// See https://api.buttondown.email/v1/schema#operation/emails_list.
-fileprivate struct EmailListRequest: APIRequest {
+private struct EmailListRequest: APIRequest {
     typealias Response = EmailListResponse
     var path: String { "/v1/emails" }
     var method: HTTPMethod { .get }
@@ -26,14 +26,14 @@ fileprivate struct EmailListRequest: APIRequest {
 class EmailRepository {
     private let realm: Realm
     private let apiClient: APIClient
-    
+
     private var requests = [AnyCancellable]()
-    
+
     init() {
         realm = try! Realm()
         apiClient = APIClient()
     }
-    
+
     func fetchAll() async throws {
         let response = try await apiClient.send(EmailListRequest())
         try await MainActor.run {
@@ -42,7 +42,7 @@ class EmailRepository {
             }
         }
     }
-    
+
     func fetch(_ id: String) -> Email? {
         realm.objects(Email.self).first(where: { $0.id == id })
     }

@@ -5,8 +5,8 @@
 //  Created by Russell Blickhan on 1/12/22.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 enum HTTPMethod: String {
     case get
@@ -30,7 +30,7 @@ extension APIRequest {
 }
 
 struct APIClient {
-    private struct Constants {
+    private enum Constants {
         static let baseURL = URL(string: "https://api.buttondown.email")!
     }
 
@@ -56,7 +56,7 @@ struct APIClient {
         urlRequest.httpBody = request.body
         // Be a very naughty boy and overwrite Authorization header
         urlRequest.setValue("Token \(apiKey)", forHTTPHeaderField: "Authorization")
-        
+
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
 
         let fractionalSecondsDateFormatter = ISO8601DateFormatter()
@@ -87,15 +87,13 @@ struct APIClient {
             } else {
                 throw DecodingError.dataCorruptedError(
                     in: container,
-                    debugDescription: "Date string \(dateString) has unexpected format"
-                )
+                    debugDescription: "Date string \(dateString) has unexpected format")
             }
         }
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-        
+
         do {
-            let decodedData = try! decoder.decode(T.Response.self, from: data)
+            let decodedData = try decoder.decode(T.Response.self, from: data)
             return decodedData
         } catch {
             throw NSError()

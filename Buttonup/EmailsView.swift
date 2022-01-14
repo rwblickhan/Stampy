@@ -5,15 +5,15 @@
 //  Created by Russell Blickhan on 1/12/22.
 //
 
-import SwiftUI
 import RealmSwift
+import SwiftUI
 
 struct EmailsView: View {
     private let emailRepo = EmailRepository()
-    
+
     @ObservedResults(Email.self) private var emails
     @State private var hasError = false
-    
+
     var body: some View {
         NavigationView {
             switch (emails.isEmpty, hasError) {
@@ -39,7 +39,7 @@ struct EmailsView: View {
             }
         }
     }
-    
+
     private func fetchAll() async {
         hasError = false
         do {

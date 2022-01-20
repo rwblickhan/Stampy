@@ -12,39 +12,57 @@ struct EmailsView: View {
     private let emailRepo = EmailRepository()
 
     @ObservedResults(Email.self) private var emails
-    @State private var hasError = false
+    @State private var hasEmailFetchError = false
 
     var body: some View {
         NavigationView {
             VStack {
-                switch (emails.isEmpty, hasError) {
-                case (true, true):
-                    List {
-                        Text("Failed to retrieve emails; try pulling to refresh!")
-                    }.refreshable {
-                        await fetchAll()
-                    }
-                case (true, false):
-                    ProgressView()
-                        .task { await fetchAll() }
-                case (false, _):
-                    List(emails.reversed()) { email in
-                        NavigationLink(destination: EmailView(email: email)) {
-                            Text(email.subject)
+                List {
+                    Section(header: draftsHeader) { }
+                    Section(header: archivesHeader) {
+                        switch (emails.isEmpty, hasEmailFetchError) {
+                        case (true, true):
+                            Text("Failed to retrieve emails; try pulling to refresh!")
+                        case (true, false):
+                            ProgressView()
+                        case (false, _):
+                            ForEach(emails.reversed()) { email in
+                                NavigationLink(destination: EmailView(email: email)) {
+                                    Text(email.subject)
+                                }
+                            }
                         }
-                    }.refreshable { await fetchAll() }
-                }
-            }.navigationTitle("Emails")
+                    }
+                }.refreshable {
+                    await fetchAll()
+                }.task {
+                    await fetchAll()
+                }.navigationTitle("Emails")
+            }
         }
     }
 
     private func fetchAll() async {
         do {
             try await emailRepo.fetchAll()
-            hasError = false
+            hasEmailFetchError = false
         } catch {
             print("\(error)")
-            hasError = true
+            hasEmailFetchError = true
+        }
+    }
+        
+    private var draftsHeader: some View {
+        HStack {
+            Image(systemName: "envelope")
+            Text("Drafts")
+        }
+    }
+    
+    private var archivesHeader: some View {
+        HStack {
+            Image(systemName: "archivebox")
+            Text("Archives")
         }
     }
 }

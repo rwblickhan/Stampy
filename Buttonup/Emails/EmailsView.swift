@@ -19,6 +19,7 @@ struct EmailsView: View {
             VStack {
                 List {
                     Section(header: draftsHeader) {}
+                    Section(header: scheduledHeader) {}
                     Section(header: archivesHeader) {
                         switch (emails.isEmpty, hasEmailFetchError) {
                         case (true, true):
@@ -28,7 +29,12 @@ struct EmailsView: View {
                         case (false, _):
                             ForEach(emails.reversed()) { email in
                                 NavigationLink(destination: EmailView(email: email)) {
-                                    Text(email.subject)
+                                    VStack(alignment: .leading) {
+                                        Text(email.subject)
+                                            .font(.headline)
+                                        Text(email.publishDate.formatted())
+                                            .font(.subheadline)
+                                    }
                                 }
                             }
                         }
@@ -58,10 +64,17 @@ struct EmailsView: View {
             Text("Drafts")
         }
     }
+    
+    private var scheduledHeader: some View {
+        HStack {
+            Image(systemName: "tray.and.arrow.up")
+            Text("Scheduled Emails")
+        }
+    }
 
     private var archivesHeader: some View {
         HStack {
-            Image(systemName: "archivebox")
+            Image(systemName: "tray.full")
             Text("Archives")
         }
     }

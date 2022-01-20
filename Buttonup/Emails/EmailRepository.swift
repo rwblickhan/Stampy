@@ -27,8 +27,6 @@ class EmailRepository {
     private let realm: Realm
     private let apiClient: APIClient
 
-    private var requests = [AnyCancellable]()
-
     init() {
         realm = try! Realm()
         apiClient = APIClient()

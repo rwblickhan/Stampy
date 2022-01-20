@@ -10,6 +10,9 @@
 		CD12BD97279291200026226F /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12BD96279291200026226F /* EmailView.swift */; };
 		CD12BD99279295790026226F /* Markdownosaur.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12BD98279295790026226F /* Markdownosaur.swift */; };
 		CD12BD9D2792967B0026226F /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = CD12BD9C2792967B0026226F /* Markdown */; };
+		CD12BDA627993D140026226F /* SubscribersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12BDA527993D140026226F /* SubscribersView.swift */; };
+		CD12BDAA27993D9E0026226F /* SubscriberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12BDA927993D9E0026226F /* SubscriberRepository.swift */; };
+		CD12BDAC27993DB50026226F /* Subscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12BDAB27993DB50026226F /* Subscriber.swift */; };
 		CD92A5B1278FE8C700DD3238 /* ButtonupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5B0278FE8C700DD3238 /* ButtonupApp.swift */; };
 		CD92A5B5278FE8C900DD3238 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD92A5B4278FE8C900DD3238 /* Assets.xcassets */; };
 		CD92A5C2278FE8C900DD3238 /* ButtonupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5C1278FE8C900DD3238 /* ButtonupTests.swift */; };
@@ -44,6 +47,9 @@
 /* Begin PBXFileReference section */
 		CD12BD96279291200026226F /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
 		CD12BD98279295790026226F /* Markdownosaur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markdownosaur.swift; sourceTree = "<group>"; };
+		CD12BDA527993D140026226F /* SubscribersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribersView.swift; sourceTree = "<group>"; };
+		CD12BDA927993D9E0026226F /* SubscriberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberRepository.swift; sourceTree = "<group>"; };
+		CD12BDAB27993DB50026226F /* Subscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscriber.swift; sourceTree = "<group>"; };
 		CD92A5AD278FE8C700DD3238 /* Buttonup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Buttonup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD92A5B0278FE8C700DD3238 /* ButtonupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonupApp.swift; sourceTree = "<group>"; };
 		CD92A5B4278FE8C900DD3238 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -101,6 +107,7 @@
 		CD12BDA2279931CB0026226F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				CD92A5B4278FE8C900DD3238 /* Assets.xcassets */,
 				CD92A5E82791340100DD3238 /* SettingsView.swift */,
 			);
 			path = Settings;
@@ -113,6 +120,16 @@
 				CD92A5E6278FF09000DD3238 /* APIClient.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		CD12BDA427993CFF0026226F /* Subscribers */ = {
+			isa = PBXGroup;
+			children = (
+				CD12BDA527993D140026226F /* SubscribersView.swift */,
+				CD12BDA927993D9E0026226F /* SubscriberRepository.swift */,
+				CD12BDAB27993DB50026226F /* Subscriber.swift */,
+			);
+			path = Subscribers;
 			sourceTree = "<group>";
 		};
 		CD92A5A4278FE8C700DD3238 = {
@@ -138,10 +155,10 @@
 		CD92A5AF278FE8C700DD3238 /* Buttonup */ = {
 			isa = PBXGroup;
 			children = (
-				CD92A5B4278FE8C900DD3238 /* Assets.xcassets */,
 				CD92A5B0278FE8C700DD3238 /* ButtonupApp.swift */,
 				CD12BDA3279931D10026226F /* Utilities */,
 				CD12BDA2279931CB0026226F /* Settings */,
+				CD12BDA427993CFF0026226F /* Subscribers */,
 				CD12BDA1279931B90026226F /* Emails */,
 			);
 			path = Buttonup;
@@ -306,8 +323,11 @@
 				CD92A5E5278FED8000DD3238 /* EmailsView.swift in Sources */,
 				CD92A5B1278FE8C700DD3238 /* ButtonupApp.swift in Sources */,
 				CD12BD99279295790026226F /* Markdownosaur.swift in Sources */,
+				CD12BDAC27993DB50026226F /* Subscriber.swift in Sources */,
 				CD12BD97279291200026226F /* EmailView.swift in Sources */,
+				CD12BDA627993D140026226F /* SubscribersView.swift in Sources */,
 				CD92A5E92791340100DD3238 /* SettingsView.swift in Sources */,
+				CD12BDAA27993D9E0026226F /* SubscriberRepository.swift in Sources */,
 				CD92A5E7278FF09000DD3238 /* APIClient.swift in Sources */,
 				CD92A5E1278FE94C00DD3238 /* Email.swift in Sources */,
 			);

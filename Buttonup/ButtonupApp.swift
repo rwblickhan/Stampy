@@ -17,6 +17,11 @@ struct ButtonupApp: App {
                         Image(systemName: "envelope")
                         Text("Emails")
                     }
+                SubscribersView()
+                    .tabItem {
+                        Image(systemName: "person.2")
+                        Text("Subscribers")
+                    }
                 SettingsView()
                     .tabItem {
                         Image(systemName: "gear")

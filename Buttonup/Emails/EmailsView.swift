@@ -64,7 +64,7 @@ struct EmailsView: View {
             Text("Drafts")
         }
     }
-    
+
     private var scheduledHeader: some View {
         HStack {
             Image(systemName: "tray.and.arrow.up")

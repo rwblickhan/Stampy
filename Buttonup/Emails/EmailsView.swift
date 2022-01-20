@@ -18,7 +18,7 @@ struct EmailsView: View {
         NavigationView {
             VStack {
                 List {
-                    Section(header: draftsHeader) { }
+                    Section(header: draftsHeader) {}
                     Section(header: archivesHeader) {
                         switch (emails.isEmpty, hasEmailFetchError) {
                         case (true, true):
@@ -51,14 +51,14 @@ struct EmailsView: View {
             hasEmailFetchError = true
         }
     }
-        
+
     private var draftsHeader: some View {
         HStack {
             Image(systemName: "envelope")
             Text("Drafts")
         }
     }
-    
+
     private var archivesHeader: some View {
         HStack {
             Image(systemName: "archivebox")

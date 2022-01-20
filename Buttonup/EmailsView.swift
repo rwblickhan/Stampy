@@ -17,23 +17,23 @@ struct EmailsView: View {
     var body: some View {
         NavigationView {
             VStack {
-            switch (emails.isEmpty, hasError) {
-            case (true, true):
-                List {
-                    Text("Failed to retrieve emails; try pulling to refresh!")
-                }.refreshable {
-                    await fetchAll()
-                }
-            case (true, false):
-                ProgressView()
-                    .task { await fetchAll() }
-            case (false, _):
-                List(emails.reversed()) { email in
-                    NavigationLink(destination: EmailView(email: email)) {
-                        Text(email.subject)
+                switch (emails.isEmpty, hasError) {
+                case (true, true):
+                    List {
+                        Text("Failed to retrieve emails; try pulling to refresh!")
+                    }.refreshable {
+                        await fetchAll()
                     }
-                }.refreshable { await fetchAll() }
-            }
+                case (true, false):
+                    ProgressView()
+                        .task { await fetchAll() }
+                case (false, _):
+                    List(emails.reversed()) { email in
+                        NavigationLink(destination: EmailView(email: email)) {
+                            Text(email.subject)
+                        }
+                    }.refreshable { await fetchAll() }
+                }
             }.navigationTitle("Emails")
         }
     }

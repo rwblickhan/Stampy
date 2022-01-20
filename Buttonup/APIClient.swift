@@ -50,21 +50,25 @@ struct APIClient {
             throw NSError(domain: "", code: 0, userInfo: nil)
         }
 
-        guard let apiKey = UserDefaults.standard.string(forKey: "api_key") else { throw NSError(domain: "", code: 0, userInfo: nil) }
+        guard let apiKey = UserDefaults.standard.string(forKey: "api_key")
+        else { throw NSError(domain: "", code: 0, userInfo: nil) }
 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
         urlRequest.httpBody = request.body
         // Be a very naughty boy and overwrite Authorization header
         urlRequest.setValue("Token \(apiKey)", forHTTPHeaderField: "Authorization")
-        
+
         let (data, response) = try await urlSession.data(for: urlRequest)
 
         guard
             let httpResponse = response as? HTTPURLResponse,
             httpResponse.statusCode == 200 else {
-                throw NSError(domain: "Bad status code (\((response as? HTTPURLResponse)?.statusCode ?? 0)", code: 0, userInfo: nil)
-            }
+            throw NSError(
+                domain: "Bad status code (\((response as? HTTPURLResponse)?.statusCode ?? 0)",
+                code: 0,
+                userInfo: nil)
+        }
 
         let fractionalSecondsDateFormatter = ISO8601DateFormatter()
         fractionalSecondsDateFormatter.formatOptions = [

@@ -12,7 +12,6 @@
 		CD12BD9D2792967B0026226F /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = CD12BD9C2792967B0026226F /* Markdown */; };
 		CD92A5B1278FE8C700DD3238 /* ButtonupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5B0278FE8C700DD3238 /* ButtonupApp.swift */; };
 		CD92A5B5278FE8C900DD3238 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD92A5B4278FE8C900DD3238 /* Assets.xcassets */; };
-		CD92A5B8278FE8C900DD3238 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD92A5B7278FE8C900DD3238 /* Preview Assets.xcassets */; };
 		CD92A5C2278FE8C900DD3238 /* ButtonupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5C1278FE8C900DD3238 /* ButtonupTests.swift */; };
 		CD92A5CC278FE8C900DD3238 /* ButtonupUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5CB278FE8C900DD3238 /* ButtonupUITests.swift */; };
 		CD92A5CE278FE8C900DD3238 /* ButtonupUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5CD278FE8C900DD3238 /* ButtonupUITestsLaunchTests.swift */; };
@@ -48,7 +47,6 @@
 		CD92A5AD278FE8C700DD3238 /* Buttonup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Buttonup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD92A5B0278FE8C700DD3238 /* ButtonupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonupApp.swift; sourceTree = "<group>"; };
 		CD92A5B4278FE8C900DD3238 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CD92A5B7278FE8C900DD3238 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CD92A5BD278FE8C900DD3238 /* ButtonupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ButtonupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD92A5C1278FE8C900DD3238 /* ButtonupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonupTests.swift; sourceTree = "<group>"; };
 		CD92A5C7278FE8C900DD3238 /* ButtonupUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ButtonupUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +87,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD12BDA1279931B90026226F /* Emails */ = {
+			isa = PBXGroup;
+			children = (
+				CD92A5E0278FE94C00DD3238 /* Email.swift */,
+				CD92A5E2278FEB0E00DD3238 /* EmailRepository.swift */,
+				CD92A5E4278FED8000DD3238 /* EmailsView.swift */,
+				CD12BD96279291200026226F /* EmailView.swift */,
+			);
+			path = Emails;
+			sourceTree = "<group>";
+		};
+		CD12BDA2279931CB0026226F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CD92A5E82791340100DD3238 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		CD12BDA3279931D10026226F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				CD12BD98279295790026226F /* Markdownosaur.swift */,
+				CD92A5E6278FF09000DD3238 /* APIClient.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		CD92A5A4278FE8C700DD3238 = {
 			isa = PBXGroup;
 			children = (
@@ -112,26 +138,13 @@
 		CD92A5AF278FE8C700DD3238 /* Buttonup */ = {
 			isa = PBXGroup;
 			children = (
-				CD92A5B0278FE8C700DD3238 /* ButtonupApp.swift */,
 				CD92A5B4278FE8C900DD3238 /* Assets.xcassets */,
-				CD92A5B6278FE8C900DD3238 /* Preview Content */,
-				CD92A5E0278FE94C00DD3238 /* Email.swift */,
-				CD92A5E82791340100DD3238 /* SettingsView.swift */,
-				CD92A5E2278FEB0E00DD3238 /* EmailRepository.swift */,
-				CD12BD96279291200026226F /* EmailView.swift */,
-				CD12BD98279295790026226F /* Markdownosaur.swift */,
-				CD92A5E4278FED8000DD3238 /* EmailsView.swift */,
-				CD92A5E6278FF09000DD3238 /* APIClient.swift */,
+				CD92A5B0278FE8C700DD3238 /* ButtonupApp.swift */,
+				CD12BDA3279931D10026226F /* Utilities */,
+				CD12BDA2279931CB0026226F /* Settings */,
+				CD12BDA1279931B90026226F /* Emails */,
 			);
 			path = Buttonup;
-			sourceTree = "<group>";
-		};
-		CD92A5B6278FE8C900DD3238 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				CD92A5B7278FE8C900DD3238 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		CD92A5C0278FE8C900DD3238 /* ButtonupTests */ = {
@@ -264,7 +277,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD92A5B8278FE8C900DD3238 /* Preview Assets.xcassets in Resources */,
 				CD92A5B5278FE8C900DD3238 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

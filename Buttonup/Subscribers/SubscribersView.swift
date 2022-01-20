@@ -5,15 +5,15 @@
 //  Created by Russell Blickhan on 1/19/22.
 //
 
-import SwiftUI
 import RealmSwift
+import SwiftUI
 
 struct SubscribersView: View {
     private let subscriberRepo = SubscriberRepository()
 
     @ObservedResults(Subscriber.self) private var subscribers
     @State private var hasSubscriberFetchError = false
-    
+
     var body: some View {
         NavigationView {
             List {
@@ -40,7 +40,7 @@ struct SubscribersView: View {
             }.navigationTitle("Subscribers")
         }
     }
-    
+
     private func fetchAll() async {
         do {
             try await subscriberRepo.fetchAll()

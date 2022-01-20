@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD12BD97279291200026226F /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12BD96279291200026226F /* EmailView.swift */; };
+		CD12BD99279295790026226F /* Markdownosaur.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12BD98279295790026226F /* Markdownosaur.swift */; };
+		CD12BD9D2792967B0026226F /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = CD12BD9C2792967B0026226F /* Markdown */; };
 		CD92A5B1278FE8C700DD3238 /* ButtonupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5B0278FE8C700DD3238 /* ButtonupApp.swift */; };
 		CD92A5B5278FE8C900DD3238 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD92A5B4278FE8C900DD3238 /* Assets.xcassets */; };
 		CD92A5B8278FE8C900DD3238 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD92A5B7278FE8C900DD3238 /* Preview Assets.xcassets */; };
@@ -40,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CD12BD96279291200026226F /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
+		CD12BD98279295790026226F /* Markdownosaur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markdownosaur.swift; sourceTree = "<group>"; };
 		CD92A5AD278FE8C700DD3238 /* Buttonup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Buttonup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD92A5B0278FE8C700DD3238 /* ButtonupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonupApp.swift; sourceTree = "<group>"; };
 		CD92A5B4278FE8C900DD3238 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD12BD9D2792967B0026226F /* Markdown in Frameworks */,
 				CD92A5DE278FE92A00DD3238 /* RealmSwift in Frameworks */,
 				CD92A5DC278FE92A00DD3238 /* Realm in Frameworks */,
 			);
@@ -112,6 +118,8 @@
 				CD92A5E0278FE94C00DD3238 /* Email.swift */,
 				CD92A5E82791340100DD3238 /* SettingsView.swift */,
 				CD92A5E2278FEB0E00DD3238 /* EmailRepository.swift */,
+				CD12BD96279291200026226F /* EmailView.swift */,
+				CD12BD98279295790026226F /* Markdownosaur.swift */,
 				CD92A5E4278FED8000DD3238 /* EmailsView.swift */,
 				CD92A5E6278FF09000DD3238 /* APIClient.swift */,
 			);
@@ -162,6 +170,7 @@
 			packageProductDependencies = (
 				CD92A5DB278FE92A00DD3238 /* Realm */,
 				CD92A5DD278FE92A00DD3238 /* RealmSwift */,
+				CD12BD9C2792967B0026226F /* Markdown */,
 			);
 			productName = Buttonup;
 			productReference = CD92A5AD278FE8C700DD3238 /* Buttonup.app */;
@@ -237,6 +246,7 @@
 			mainGroup = CD92A5A4278FE8C700DD3238;
 			packageReferences = (
 				CD92A5DA278FE92A00DD3238 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				CD12BD9B2792967B0026226F /* XCRemoteSwiftPackageReference "swift-markdown" */,
 			);
 			productRefGroup = CD92A5AE278FE8C700DD3238 /* Products */;
 			projectDirPath = "";
@@ -283,6 +293,8 @@
 				CD92A5E3278FEB0E00DD3238 /* EmailRepository.swift in Sources */,
 				CD92A5E5278FED8000DD3238 /* EmailsView.swift in Sources */,
 				CD92A5B1278FE8C700DD3238 /* ButtonupApp.swift in Sources */,
+				CD12BD99279295790026226F /* Markdownosaur.swift in Sources */,
+				CD12BD97279291200026226F /* EmailView.swift in Sources */,
 				CD92A5E92791340100DD3238 /* SettingsView.swift in Sources */,
 				CD92A5E7278FF09000DD3238 /* APIClient.swift in Sources */,
 				CD92A5E1278FE94C00DD3238 /* Email.swift in Sources */,
@@ -614,6 +626,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CD12BD9B2792967B0026226F /* XCRemoteSwiftPackageReference "swift-markdown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-markdown";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		CD92A5DA278FE92A00DD3238 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -625,6 +645,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CD12BD9C2792967B0026226F /* Markdown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD12BD9B2792967B0026226F /* XCRemoteSwiftPackageReference "swift-markdown" */;
+			productName = Markdown;
+		};
 		CD92A5DB278FE92A00DD3238 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CD92A5DA278FE92A00DD3238 /* XCRemoteSwiftPackageReference "realm-swift" */;

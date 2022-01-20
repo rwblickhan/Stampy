@@ -16,6 +16,7 @@ struct EmailsView: View {
 
     var body: some View {
         NavigationView {
+            VStack {
             switch (emails.isEmpty, hasError) {
             case (true, true):
                 List {
@@ -25,33 +26,25 @@ struct EmailsView: View {
                 }
             case (true, false):
                 ProgressView()
-                    .task {
-                        await fetchAll()
-                    }
+                    .task { await fetchAll() }
             case (false, _):
-                List {
-                    ForEach(emails) { email in
+                List(emails.reversed()) { email in
+                    NavigationLink(destination: EmailView(email: email)) {
                         Text(email.subject)
                     }
-                }.refreshable {
-                    await fetchAll()
-                }
+                }.refreshable { await fetchAll() }
             }
+            }.navigationTitle("Emails")
         }
     }
 
     private func fetchAll() async {
-        hasError = false
         do {
             try await emailRepo.fetchAll()
+            hasError = false
         } catch {
+            print("\(error)")
             hasError = true
         }
-    }
-}
-
-struct EmailsView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmailsView()
     }
 }

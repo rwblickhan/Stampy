@@ -10,6 +10,8 @@ import RealmSwift
 import SwiftUI
 
 struct EmailView: View {
+    private let emailRepo = EmailRepository()
+    
     @ObservedRealmObject var email: Email
 
     private var markdown: AttributedString {
@@ -18,8 +20,15 @@ struct EmailView: View {
     }
 
     var body: some View {
-        ScrollView {
+        List {
             Text(markdown)
         }
+        .refreshable {
+            do {
+                try await emailRepo.fetch(email.id)
+            } catch {
+                print(error)
+            }
+        }.navigationTitle(email.subject)
     }
 }

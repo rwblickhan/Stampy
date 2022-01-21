@@ -11,7 +11,7 @@ import SwiftUI
 
 struct EmailView: View {
     private let emailRepo = EmailRepository()
-    
+
     @ObservedRealmObject var email: Email
 
     private var markdown: AttributedString {

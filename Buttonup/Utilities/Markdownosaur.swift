@@ -53,11 +53,14 @@ struct Markdownosaur: MarkupVisitor {
 
         return result
     }
-    
+
     mutating func visitImage(_ image: Image) -> NSAttributedString {
         NSAttributedString(
             string: "image",
-            attributes: [NSAttributedString.Key.imgSource: image.source as Any, NSAttributedString.Key.imgTitle: image.title as Any])
+            attributes: [
+                NSAttributedString.Key.imgSource: image.source as Any,
+                NSAttributedString.Key.imgTitle: image.title as Any,
+            ])
     }
 
     mutating func visitParagraph(_ paragraph: Paragraph) -> NSAttributedString {

@@ -53,6 +53,12 @@ struct Markdownosaur: MarkupVisitor {
 
         return result
     }
+    
+    mutating func visitImage(_ image: Image) -> NSAttributedString {
+        NSAttributedString(
+            string: "image",
+            attributes: [NSAttributedString.Key.imgSource: image.source as Any, NSAttributedString.Key.imgTitle: image.title as Any])
+    }
 
     mutating func visitParagraph(_ paragraph: Paragraph) -> NSAttributedString {
         let result = NSMutableAttributedString()
@@ -428,4 +434,9 @@ extension NSAttributedString {
     static func doubleNewline(withFontSize fontSize: CGFloat) -> NSAttributedString {
         NSAttributedString(string: "\n\n", attributes: [.font: UIFont.systemFont(ofSize: fontSize, weight: .regular)])
     }
+}
+
+extension NSAttributedString.Key {
+    static let imgSource = NSAttributedString.Key("imgSource")
+    static let imgTitle = NSAttributedString.Key("imgTitle")
 }

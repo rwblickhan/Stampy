@@ -13,6 +13,7 @@
 		CD12BDA627993D140026226F /* SubscribersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12BDA527993D140026226F /* SubscribersView.swift */; };
 		CD12BDAA27993D9E0026226F /* SubscriberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12BDA927993D9E0026226F /* SubscriberRepository.swift */; };
 		CD12BDAC27993DB50026226F /* Subscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12BDAB27993DB50026226F /* Subscriber.swift */; };
+		CD12BDBB27ACF1010026226F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CD12BDBA27ACF1010026226F /* Kingfisher */; };
 		CD92A5B1278FE8C700DD3238 /* ButtonupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5B0278FE8C700DD3238 /* ButtonupApp.swift */; };
 		CD92A5B5278FE8C900DD3238 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD92A5B4278FE8C900DD3238 /* Assets.xcassets */; };
 		CD92A5C2278FE8C900DD3238 /* ButtonupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92A5C1278FE8C900DD3238 /* ButtonupTests.swift */; };
@@ -70,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD12BDBB27ACF1010026226F /* Kingfisher in Frameworks */,
 				CD12BD9D2792967B0026226F /* Markdown in Frameworks */,
 				CD92A5DE278FE92A00DD3238 /* RealmSwift in Frameworks */,
 				CD92A5DC278FE92A00DD3238 /* Realm in Frameworks */,
@@ -201,6 +203,7 @@
 				CD92A5DB278FE92A00DD3238 /* Realm */,
 				CD92A5DD278FE92A00DD3238 /* RealmSwift */,
 				CD12BD9C2792967B0026226F /* Markdown */,
+				CD12BDBA27ACF1010026226F /* Kingfisher */,
 			);
 			productName = Buttonup;
 			productReference = CD92A5AD278FE8C700DD3238 /* Buttonup.app */;
@@ -277,6 +280,7 @@
 			packageReferences = (
 				CD92A5DA278FE92A00DD3238 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				CD12BD9B2792967B0026226F /* XCRemoteSwiftPackageReference "swift-markdown" */,
+				CD12BDB927ACF1010026226F /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = CD92A5AE278FE8C700DD3238 /* Products */;
 			projectDirPath = "";
@@ -664,6 +668,14 @@
 				kind = branch;
 			};
 		};
+		CD12BDB927ACF1010026226F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		CD92A5DA278FE92A00DD3238 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -679,6 +691,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CD12BD9B2792967B0026226F /* XCRemoteSwiftPackageReference "swift-markdown" */;
 			productName = Markdown;
+		};
+		CD12BDBA27ACF1010026226F /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD12BDB927ACF1010026226F /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 		CD92A5DB278FE92A00DD3238 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;

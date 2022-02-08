@@ -1,13 +1,13 @@
 //
-//  ButtonupUITests.swift
-//  ButtonupUITests
+//  StampyUITests.swift
+//  StampyUITests
 //
 //  Created by Russell Blickhan on 1/12/22.
 //
 
 import XCTest
 
-class ButtonupUITests: XCTestCase {
+class StampyUITests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 

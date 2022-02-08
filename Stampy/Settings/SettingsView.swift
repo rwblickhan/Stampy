@@ -1,6 +1,6 @@
 //
 //  SettingsView.swift
-//  Buttonup
+//  Stampy
 //
 //  Created by Russell Blickhan on 1/13/22.
 //

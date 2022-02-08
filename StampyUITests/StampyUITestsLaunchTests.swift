@@ -1,13 +1,13 @@
 //
-//  ButtonupUITestsLaunchTests.swift
-//  ButtonupUITests
+//  StampyUITestsLaunchTests.swift
+//  StampyUITests
 //
 //  Created by Russell Blickhan on 1/12/22.
 //
 
 import XCTest
 
-class ButtonupUITestsLaunchTests: XCTestCase {
+class StampyUITestsLaunchTests: XCTestCase {
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }

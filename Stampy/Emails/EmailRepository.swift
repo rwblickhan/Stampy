@@ -1,6 +1,6 @@
 //
 //  EmailRepository.swift
-//  Buttonup
+//  Stampy
 //
 //  Created by Russell Blickhan on 1/12/22.
 //

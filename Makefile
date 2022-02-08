@@ -12,4 +12,4 @@ git:
 	cp Scripts/post-commit .git/hooks/post-commit
 
 open: default
-	open Buttonup.xcodeproj
+	open Stampy.xcodeproj

@@ -13,34 +13,26 @@ struct SubscribersView: View {
 
     @ObservedResults(Subscriber.self) private var subscribers
     @State private var hasSubscriberFetchError = false
-
+    @AppStorage("api_key", store: UserDefaults.standard) private var persistedAPIKey: String?
+    
+    private var regularSubscribers: [Subscriber] {
+        subscribers.filter { $0.subscriberType == .regular }
+    }
+    
     var body: some View {
         NavigationView {
-            List {
-                switch (subscribers.isEmpty, hasSubscriberFetchError) {
-                case (true, true):
-                    Text("Failed to retrieve emails; try pulling to refresh!")
-                case (true, false):
-                    ProgressView()
-                case (false, _):
-                    ForEach(subscribers) { subscriber in
-                        VStack(alignment: .leading) {
-                            Text(subscriber.email)
-                                .font(.headline)
-                            Text("Subscribed since \(subscriber.creationDate.formatted())")
-                                .font(.subheadline)
-                        }
-                    }
-                }
+            VStack {
+                List {
+                    regularSubscribersSection
+                }.refreshable {
+                    await fetchAll()
+                }.onAppear {
+                    Task { await fetchAll() }
+                }.navigationTitle("Subscribers")
             }
-            .refreshable {
-                await fetchAll()
-            }.task {
-                await fetchAll()
-            }.navigationTitle("Subscribers")
         }
     }
-
+    
     private func fetchAll() async {
         do {
             try await subscriberRepo.fetchAll()
@@ -48,6 +40,35 @@ struct SubscribersView: View {
         } catch {
             print("\(error)")
             hasSubscriberFetchError = true
+        }
+    }
+    
+    private var regularSubscribersHeader: some View {
+        HStack {
+            Image(systemName: "person.2")
+            Text("Regular Subscribers")
+        }
+    }
+    
+    private var regularSubscribersSection: some View {
+        Section(header: regularSubscribersHeader) {
+            switch (regularSubscribers.isEmpty, hasSubscriberFetchError, persistedAPIKey == nil) {
+            case (_, _, true):
+                Text("Add your Buttondown API key in settings, then pull to refresh here!")
+            case (true, true, false):
+                Text("Failed to retrieve subscribers; try pulling to refresh!")
+            case (true, false, false):
+                ProgressView()
+            case (false, _, false):
+                ForEach(regularSubscribers) { subscriber in
+                    VStack(alignment: .leading) {
+                        Text(subscriber.email)
+                            .font(.headline)
+                        Text("Subscribed since \(subscriber.creationDate.formatted())")
+                            .font(.subheadline)
+                    }
+                }
+            }
         }
     }
 }

@@ -109,7 +109,6 @@
 		CD12BDA2279931CB0026226F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				CD92A5B4278FE8C900DD3238 /* Assets.xcassets */,
 				CD92A5E82791340100DD3238 /* SettingsView.swift */,
 			);
 			path = Settings;
@@ -158,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				CD92A5B0278FE8C700DD3238 /* StampyApp.swift */,
+				CD92A5B4278FE8C900DD3238 /* Assets.xcassets */,
 				CD12BDA3279931D10026226F /* Utilities */,
 				CD12BDA2279931CB0026226F /* Settings */,
 				CD12BDA427993CFF0026226F /* Subscribers */,

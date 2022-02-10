@@ -13,37 +13,21 @@ struct EmailsView: View {
 
     @ObservedResults(Email.self) private var emails
     @State private var hasEmailFetchError = false
+    @AppStorage("api_key", store: UserDefaults.standard) private var persistedAPIKey: String?
 
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    Section(header: draftsHeader) {}
-                    Section(header: scheduledHeader) {}
-                    Section(header: archivesHeader) {
-                        switch (emails.isEmpty, hasEmailFetchError) {
-                        case (true, true):
-                            Text("Failed to retrieve emails; try pulling to refresh!")
-                        case (true, false):
-                            ProgressView()
-                        case (false, _):
-                            ForEach(emails.reversed()) { email in
-                                NavigationLink(destination: EmailView(email: email)) {
-                                    VStack(alignment: .leading) {
-                                        Text(email.subject)
-                                            .font(.headline)
-                                        Text(email.publishDate.formatted())
-                                            .font(.subheadline)
-                                    }
-                                }
-                            }
-                        }
-                    }
+//                    draftsSection
+//                    scheduledSection
+                    archivesSection
                 }.refreshable {
                     await fetchAll()
-                }.task {
-                    await fetchAll()
-                }.navigationTitle("Emails")
+                }.onAppear {
+                    Task { await fetchAll() }
+                }
+                .navigationTitle("Emails")
             }
         }
     }
@@ -64,6 +48,10 @@ struct EmailsView: View {
             Text("Drafts")
         }
     }
+    
+    private var draftsSection: some View {
+        Section(header: draftsHeader) {}
+    }
 
     private var scheduledHeader: some View {
         HStack {
@@ -71,11 +59,39 @@ struct EmailsView: View {
             Text("Scheduled Emails")
         }
     }
+    
+    private var scheduledSection: some View {
+        Section(header: scheduledHeader) {}
+    }
 
     private var archivesHeader: some View {
         HStack {
             Image(systemName: "tray.full")
             Text("Archives")
+        }
+    }
+    
+    private var archivesSection: some View {
+        Section(header: archivesHeader) {
+            switch (emails.isEmpty, hasEmailFetchError, persistedAPIKey == nil) {
+            case (_, _, true):
+                Text("Add your Buttondown API key in settings, then pull to refresh here!")
+            case (true, true, false):
+                Text("Failed to retrieve emails; try pulling to refresh!")
+            case (true, false, false):
+                ProgressView()
+            case (false, _, false):
+                ForEach(emails.reversed()) { email in
+                    NavigationLink(destination: EmailView(email: email)) {
+                        VStack(alignment: .leading) {
+                            Text(email.subject)
+                                .font(.headline)
+                            Text(email.publishDate.formatted())
+                                .font(.subheadline)
+                        }
+                    }
+                }
+            }
         }
     }
 }

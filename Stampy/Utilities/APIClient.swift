@@ -107,7 +107,8 @@ struct APIClient {
             let decodedData = try decoder.decode(T.Response.self, from: data)
             return decodedData
         } catch {
-            throw NSError(domain: "", code: 0, userInfo: nil)
+            assert(false, "\(error)")
+            throw NSError(domain: "", code: 0, userInfo: ["error": error])
         }
     }
 }

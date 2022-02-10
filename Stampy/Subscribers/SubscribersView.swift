@@ -35,8 +35,8 @@ struct SubscribersView: View {
 
     private func fetchAll() async {
         do {
-            try await subscriberRepo.fetchAll()
             hasSubscriberFetchError = false
+            try await subscriberRepo.fetchAll()
         } catch {
             print("\(error)")
             hasSubscriberFetchError = true

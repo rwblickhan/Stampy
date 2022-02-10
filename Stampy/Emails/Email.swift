@@ -13,6 +13,16 @@ enum EmailType: String, Codable, PersistableEnum {
     case `private`
     case premium
     case promoted
+    case unknown
+    
+    init(from decoder: Decoder) throws {
+        let rawString = try decoder.singleValueContainer().decode(String.self)
+        if let emailType = EmailType(rawValue: rawString) {
+            self = emailType
+        } else {
+            self = .unknown
+        }
+    }
 }
 
 class Email: Object, Codable, Identifiable {
@@ -20,5 +30,5 @@ class Email: Object, Codable, Identifiable {
     @Persisted var body: String
     @Persisted var publishDate: Date
     @Persisted var subject: String
-    @Persisted var emailType: EmailType?
+    @Persisted var emailType: EmailType
 }

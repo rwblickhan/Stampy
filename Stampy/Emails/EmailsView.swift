@@ -34,8 +34,8 @@ struct EmailsView: View {
 
     private func fetchAll() async {
         do {
-            try await emailRepo.fetchAll()
             hasEmailFetchError = false
+            try await emailRepo.fetchAll()
         } catch {
             print("\(error)")
             hasEmailFetchError = true

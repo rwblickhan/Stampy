@@ -48,7 +48,7 @@ struct EmailsView: View {
             Text("Drafts")
         }
     }
-    
+
     private var draftsSection: some View {
         Section(header: draftsHeader) {}
     }
@@ -59,7 +59,7 @@ struct EmailsView: View {
             Text("Scheduled Emails")
         }
     }
-    
+
     private var scheduledSection: some View {
         Section(header: scheduledHeader) {}
     }
@@ -70,7 +70,7 @@ struct EmailsView: View {
             Text("Archives")
         }
     }
-    
+
     private var archivesSection: some View {
         Section(header: archivesHeader) {
             switch (emails.isEmpty, hasEmailFetchError, persistedAPIKey == nil) {

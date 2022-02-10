@@ -34,7 +34,9 @@ struct SettingsView: View {
                                 persistedAPIKey = apiKey
                             })
                         }
-                        Link("Open Buttondown API Key Settings", destination: URL(string: "https://buttondown.email/settings/programming")!)
+                        Link(
+                            "Open Buttondown API Key Settings",
+                            destination: URL(string: "https://buttondown.email/settings/programming")!)
                     }
                 }
             }.navigationTitle("Settings")

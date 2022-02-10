@@ -14,11 +14,11 @@ struct SubscribersView: View {
     @ObservedResults(Subscriber.self) private var subscribers
     @State private var hasSubscriberFetchError = false
     @AppStorage("api_key", store: UserDefaults.standard) private var persistedAPIKey: String?
-    
+
     private var regularSubscribers: [Subscriber] {
         subscribers.filter { $0.subscriberType == .regular }
     }
-    
+
     var body: some View {
         NavigationView {
             VStack {
@@ -32,7 +32,7 @@ struct SubscribersView: View {
             }
         }
     }
-    
+
     private func fetchAll() async {
         do {
             try await subscriberRepo.fetchAll()
@@ -42,14 +42,14 @@ struct SubscribersView: View {
             hasSubscriberFetchError = true
         }
     }
-    
+
     private var regularSubscribersHeader: some View {
         HStack {
             Image(systemName: "person.2")
             Text("Regular Subscribers")
         }
     }
-    
+
     private var regularSubscribersSection: some View {
         Section(header: regularSubscribersHeader) {
             switch (regularSubscribers.isEmpty, hasSubscriberFetchError, persistedAPIKey == nil) {

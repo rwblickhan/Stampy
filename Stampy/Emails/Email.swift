@@ -14,7 +14,7 @@ enum EmailType: String, Codable, PersistableEnum {
     case premium
     case promoted
     case unknown
-    
+
     init(from decoder: Decoder) throws {
         let rawString = try decoder.singleValueContainer().decode(String.self)
         if let emailType = EmailType(rawValue: rawString) {

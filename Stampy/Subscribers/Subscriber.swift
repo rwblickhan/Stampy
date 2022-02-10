@@ -15,7 +15,7 @@ enum SubscriberType: String, Codable, PersistableEnum {
     case regular
     case removed
     case spammy
-    
+
     init(from decoder: Decoder) throws {
         let rawString = try decoder.singleValueContainer().decode(String.self)
         if let subscriberType = SubscriberType(rawValue: rawString) {

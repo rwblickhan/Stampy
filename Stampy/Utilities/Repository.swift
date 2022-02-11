@@ -17,7 +17,7 @@ class Repository {
         realm = try! Realm(configuration: configuration)
         apiClient = APIClient()
     }
-    
+
     func fetch<T: APIRequest>(_ request: T, onFetch: (Realm, T.Response) -> Void) async throws {
         let response = try await apiClient.send(request)
         try await MainActor.run {

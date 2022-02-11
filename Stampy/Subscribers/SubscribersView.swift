@@ -10,30 +10,39 @@ import SwiftUI
 
 struct SubscribersView: View {
     private let subscriberRepo = SubscriberRepository()
-
+    
     @ObservedResults(Subscriber.self) private var subscribers
-    @State private var hasSubscriberFetchError = false
     @AppStorage("api_key", store: UserDefaults.standard) private var persistedAPIKey: String?
+    @State private var loadingState: LoadingState = .none
+    @State private var queryString: String = ""
 
     private var regularSubscribers: [Subscriber] {
-        subscribers.filter { $0.subscriberType == .regular }
+        subscribers
+            .filter { $0.subscriberType == .regular }
+            .filter { queryString.isEmpty ? true : $0.email.lowercased().contains(queryString.lowercased()) }
     }
 
     private var spammySubscribers: [Subscriber] {
-        subscribers.filter { $0.subscriberType == .spammy }
+        subscribers
+            .filter { $0.subscriberType == .spammy }
+            .filter { queryString.isEmpty ? true : $0.email.lowercased().contains(queryString.lowercased()) }
     }
-
+    
     var body: some View {
         NavigationView {
             List {
-                switch (subscribers.isEmpty, hasSubscriberFetchError, persistedAPIKey == nil) {
-                case (_, _, true):
-                    Text("Add your Buttondown API key in settings, then pull to refresh here!")
-                case (true, true, false):
-                    Text("Failed to retrieve subscribers; try pulling to refresh!")
-                case (true, false, false):
-                    ProgressView()
-                case (false, _, false):
+                if subscribers.isEmpty {
+                    switch (loadingState, persistedAPIKey == nil) {
+                    case (.loading, _):
+                        ProgressView()
+                    case (_, true):
+                        Text("Add your Buttondown API key in settings, then come back here!")
+                    case (.error, false):
+                        Text("Failed to retrieve subscribers; try pulling to refresh!")
+                    case (.none, false):
+                        Text("Huh, looks like you don't have any subscribers yet. Sorry!")
+                    }
+                } else {
                     regularSubscribersSection
                     spammySubscribersSection
                 }
@@ -47,15 +56,17 @@ struct SubscribersView: View {
             .listStyle(GroupedListStyle())
             .navigationTitle("Subscribers")
         }
+        .searchable(text: $queryString)
     }
 
     private func fetchAll() async {
         do {
-            hasSubscriberFetchError = false
+            loadingState = .loading
             try await subscriberRepo.fetchAll()
+            loadingState = .none
         } catch {
             print("\(error)")
-            hasSubscriberFetchError = true
+            loadingState = .error
         }
     }
 

@@ -19,6 +19,7 @@ class Repository {
     }
 
     func fetch<T: APIRequest>(_ request: T, onFetch: (Realm, T.Response) -> Void) async throws {
+        assert(request.method == .get, "Use mutate() for mutating requests!")
         let response = try await apiClient.send(request)
         try await MainActor.run {
             try realm.write {

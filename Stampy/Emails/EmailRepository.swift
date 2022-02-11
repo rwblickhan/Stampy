@@ -43,7 +43,7 @@ private struct DeleteScheduledEmailMutation: APIRequest {
     typealias Response = DeleteScheduledEmailResponse
     var path: String { "/v1/scheduled-emails/\(emailID)" }
     var method: HTTPMethod { .delete }
-    
+
     let emailID: String
 }
 
@@ -76,10 +76,10 @@ class EmailRepository: Repository {
             realm.add(response, update: .all)
         }
     }
-    
+
     func deleteScheduled(_ email: Email) async throws {
         try await mutate(DeleteScheduledEmailMutation(emailID: email.id), onOptimisticMutation: { realm in
             realm.object(ofType: Email.self, forPrimaryKey: email.id).flatMap { realm.delete($0) }
-        }) { realm, response in }
+        }) { _, _ in }
     }
 }

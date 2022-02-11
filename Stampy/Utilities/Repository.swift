@@ -27,8 +27,11 @@ class Repository {
             }
         }
     }
-    
-    func mutate<T: APIRequest>(_ request: T, onOptimisticMutation: (Realm) -> Void, onResponse: (Realm, T.Response) -> Void) async throws {
+
+    func mutate<T: APIRequest>(
+        _ request: T,
+        onOptimisticMutation: (Realm) -> Void,
+        onResponse: (Realm, T.Response) -> Void) async throws {
         assert(request.method != .get, "Use fetch() for non-mutating requests!")
         try await MainActor.run {
             try realm.write {

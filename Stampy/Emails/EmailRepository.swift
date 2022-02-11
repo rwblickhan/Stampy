@@ -23,6 +23,20 @@ private struct EmailListRequest: APIRequest {
     var method: HTTPMethod { .get }
 }
 
+private struct ScheduledEmailListResponse: Codable {
+    let results: [Email]
+    let next: String?
+    let previous: String?
+    let count: Int
+}
+
+/// See https://api.buttondown.email/v1/schema#operation/List%20all%20scheduled%20emails.
+private struct ScheduledEmailListRequest: APIRequest {
+    typealias Response = ScheduledEmailListResponse
+    var path: String { "/v1/scheduled-emails" }
+    var method: HTTPMethod { .get }
+}
+
 /// See https://api.buttondown.email/v1/schema#operation/Retrieve%20an%20existing%20email.
 private struct EmailRequest: APIRequest {
     typealias Response = Email
@@ -41,8 +55,17 @@ class EmailRepository {
         apiClient = APIClient()
     }
 
-    func fetchAll() async throws {
+    func fetchArchive() async throws {
         let response = try await apiClient.send(EmailListRequest())
+        try await MainActor.run {
+            try realm.write {
+                realm.add(response.results, update: .all)
+            }
+        }
+    }
+    
+    func fetchScheduled() async throws {
+        let response = try await apiClient.send(ScheduledEmailListRequest())
         try await MainActor.run {
             try realm.write {
                 realm.add(response.results, update: .all)

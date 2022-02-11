@@ -13,32 +13,40 @@ struct EmailsView: View {
 
     @ObservedResults(Email.self) private var emails
     @AppStorage("api_key", store: UserDefaults.standard) private var persistedAPIKey: String?
-    @State private var loadingState: LoadingState = .none
+    @State private var archivesLoadingState: LoadingState = .none
+    @State private var scheduledLoadingState: LoadingState = .none
     @State private var queryString: String = ""
 
-    private var filteredEmails: [Email] {
+    private var filteredArchives: [Email] {
         emails
+            .filter { $0.publishDate <= Date() }
             .filter { queryString.isEmpty ? true : $0.subject.lowercased().contains(queryString.lowercased()) }
-            .reversed()
+            .sorted(by: { (e1, e2) in
+                // Newest first
+                e1.publishDate > e2.publishDate
+            })
     }
-
+    
+    private var filteredScheduled: [Email] {
+        emails
+            .filter { $0.publishDate > Date() }
+            .filter { queryString.isEmpty ? true : $0.subject.lowercased().contains(queryString.lowercased()) }
+            .sorted(by: { (e1, e2) in
+                // Soonest first
+                e1.publishDate < e2.publishDate
+            })
+    }
+    
     var body: some View {
         NavigationView {
             List {
-                if emails.isEmpty {
-                    switch (loadingState, persistedAPIKey == nil) {
-                    case (.loading, _):
-                        ProgressView()
-                    case (_, true):
-                        Text("Add your Buttondown API key in settings, then come back here!")
-                    case (.error, false):
-                        Text("Failed to retrieve emails; try pulling to refresh!")
-                    case (.none, false):
-                        Text("Huh, looks like you don't have any emails yet. Get writing!")
-                    }
+                if emails.isEmpty && (archivesLoadingState == .loading || scheduledLoadingState == .loading) {
+                    ProgressView()
+                } else if emails.isEmpty && persistedAPIKey == nil {
+                    Text("Add your Buttondown API key in settings, then come back here!")
                 } else {
                     //                draftsSection
-                    //                scheduledSection
+                    scheduledSection
                     archivesSection
                 }
             }.refreshable {
@@ -54,12 +62,21 @@ struct EmailsView: View {
 
     private func fetchAll() async {
         do {
-            loadingState = .loading
-            try await emailRepo.fetchAll()
-            loadingState = .none
+            archivesLoadingState = .loading
+            try await emailRepo.fetchArchive()
+            archivesLoadingState = .none
         } catch {
             print("\(error)")
-            loadingState = .error
+            archivesLoadingState = .error
+        }
+        
+        do {
+            scheduledLoadingState = .loading
+            try await emailRepo.fetchScheduled()
+            scheduledLoadingState = .none
+        } catch {
+            print("\(error)")
+            scheduledLoadingState = .error
         }
     }
 
@@ -68,18 +85,37 @@ struct EmailsView: View {
     }
 
     private var scheduledSection: some View {
-        Section(header: Label("Scheduled Emails", systemImage: "tray.and.arrow.up")) {}
+        Section(header: Label("Scheduled Emails", systemImage: "tray.and.arrow.up")) {
+            if scheduledLoadingState == .error {
+                Text("Failed to retrieve scheduled emails; try pulling to refresh!")
+            } else {
+                ForEach(filteredScheduled) { email in
+                    NavigationLink(destination: EmailView(email: email)) {
+                        LazyVStack(alignment: .leading) {
+                            Text(email.subject)
+                                .font(.headline)
+                            Text(email.publishDate.formatted())
+                                .font(.subheadline)
+                        }
+                    }
+                }
+            }
+        }
     }
-
+    
     private var archivesSection: some View {
         Section(header: Label("Archives", systemImage: "tray.full")) {
-            ForEach(filteredEmails) { email in
-                NavigationLink(destination: EmailView(email: email)) {
-                    LazyVStack(alignment: .leading) {
-                        Text(email.subject)
-                            .font(.headline)
-                        Text(email.publishDate.formatted())
-                            .font(.subheadline)
+            if archivesLoadingState == .error {
+                Text("Failed to retrieve emails; try pulling to refresh!")
+            } else {
+                ForEach(filteredArchives) { email in
+                    NavigationLink(destination: EmailView(email: email)) {
+                        LazyVStack(alignment: .leading) {
+                            Text(email.subject)
+                                .font(.headline)
+                            Text(email.publishDate.formatted())
+                                .font(.subheadline)
+                        }
                     }
                 }
             }

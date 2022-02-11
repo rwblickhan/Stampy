@@ -17,8 +17,8 @@ class Repository {
         realm = try! Realm(configuration: configuration)
         apiClient = APIClient()
     }
-    
-    func makeRequest(_ request: APIRequest) {
+
+    func makeRequest(_: APIRequest) {
         try await MainActor.run {
             try realm.write {
                 realm.add(response.results, update: .all)

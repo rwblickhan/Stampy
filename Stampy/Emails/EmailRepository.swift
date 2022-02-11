@@ -46,40 +46,22 @@ private struct EmailRequest: APIRequest {
     let emailID: String
 }
 
-class EmailRepository {
-    private let realm: Realm
-    private let apiClient: APIClient
-
-    init() {
-        let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-        realm = try! Realm(configuration: configuration)
-        apiClient = APIClient()
-    }
-
+class EmailRepository: Repository {
     func fetchArchive() async throws {
-        let response = try await apiClient.send(EmailListRequest())
-        try await MainActor.run {
-            try realm.write {
-                realm.add(response.results, update: .all)
-            }
-        }
+        try await fetch(EmailListRequest(), onFetch: { realm, response in
+            realm.add(response.results, update: .all)
+        })
     }
 
     func fetchScheduled() async throws {
-        let response = try await apiClient.send(ScheduledEmailListRequest())
-        try await MainActor.run {
-            try realm.write {
-                realm.add(response.results, update: .all)
-            }
-        }
+        try await fetch(ScheduledEmailListRequest(), onFetch: { realm, response in
+            realm.add(response.results, update: .all)
+        })
     }
 
     func fetch(_ emailID: String) async throws {
-        let response = try await apiClient.send(EmailRequest(emailID: emailID))
-        try await MainActor.run {
-            try realm.write {
-                realm.add(response, update: .all)
-            }
-        }
+        try await fetch(EmailRequest(emailID: emailID), onFetch: { realm, response in
+            realm.add(response, update: .all)
+        })
     }
 }

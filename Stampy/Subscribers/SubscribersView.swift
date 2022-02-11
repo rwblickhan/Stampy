@@ -62,7 +62,7 @@ struct SubscribersView: View {
     private func fetchAll() async {
         do {
             loadingState = .loading
-            try await subscriberRepo.fetchAll()
+            try await subscriberRepo.fetchSubscribers()
             loadingState = .none
         } catch {
             print("\(error)")

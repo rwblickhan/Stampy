@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CD0C2D9927B62C8C009C6EAE /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0C2D9827B62C8C009C6EAE /* LoadingState.swift */; };
+		CD0C2D9F27B72393009C6EAE /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0C2D9E27B72393009C6EAE /* Repository.swift */; };
 		CD12BD97279291200026226F /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12BD96279291200026226F /* EmailView.swift */; };
 		CD12BD99279295790026226F /* Markdownosaur.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD12BD98279295790026226F /* Markdownosaur.swift */; };
 		CD12BD9D2792967B0026226F /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = CD12BD9C2792967B0026226F /* Markdown */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		CD0C2D9827B62C8C009C6EAE /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
+		CD0C2D9E27B72393009C6EAE /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		CD12BD96279291200026226F /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
 		CD12BD98279295790026226F /* Markdownosaur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markdownosaur.swift; sourceTree = "<group>"; };
 		CD12BDA527993D140026226F /* SubscribersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribersView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				CD12BD98279295790026226F /* Markdownosaur.swift */,
 				CD92A5E6278FF09000DD3238 /* APIClient.swift */,
 				CD0C2D9827B62C8C009C6EAE /* LoadingState.swift */,
+				CD0C2D9E27B72393009C6EAE /* Repository.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				CD0C2D9927B62C8C009C6EAE /* LoadingState.swift in Sources */,
 				CD92A5E3278FEB0E00DD3238 /* EmailRepository.swift in Sources */,
 				CD92A5E5278FED8000DD3238 /* EmailsView.swift in Sources */,
+				CD0C2D9F27B72393009C6EAE /* Repository.swift in Sources */,
 				CD92A5B1278FE8C700DD3238 /* StampyApp.swift in Sources */,
 				CD12BD99279295790026226F /* Markdownosaur.swift in Sources */,
 				CD12BDAC27993DB50026226F /* Subscriber.swift in Sources */,

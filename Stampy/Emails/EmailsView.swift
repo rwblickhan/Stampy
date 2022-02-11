@@ -21,22 +21,22 @@ struct EmailsView: View {
         emails
             .filter { $0.publishDate <= Date() }
             .filter { queryString.isEmpty ? true : $0.subject.lowercased().contains(queryString.lowercased()) }
-            .sorted(by: { (e1, e2) in
+            .sorted(by: { e1, e2 in
                 // Newest first
                 e1.publishDate > e2.publishDate
             })
     }
-    
+
     private var filteredScheduled: [Email] {
         emails
             .filter { $0.publishDate > Date() }
             .filter { queryString.isEmpty ? true : $0.subject.lowercased().contains(queryString.lowercased()) }
-            .sorted(by: { (e1, e2) in
+            .sorted(by: { e1, e2 in
                 // Soonest first
                 e1.publishDate < e2.publishDate
             })
     }
-    
+
     var body: some View {
         NavigationView {
             List {
@@ -69,7 +69,7 @@ struct EmailsView: View {
             print("\(error)")
             archivesLoadingState = .error
         }
-        
+
         do {
             scheduledLoadingState = .loading
             try await emailRepo.fetchScheduled()
@@ -102,7 +102,7 @@ struct EmailsView: View {
             }
         }
     }
-    
+
     private var archivesSection: some View {
         Section(header: Label("Archives", systemImage: "tray.full")) {
             if archivesLoadingState == .error {

@@ -63,7 +63,7 @@ class EmailRepository {
             }
         }
     }
-    
+
     func fetchScheduled() async throws {
         let response = try await apiClient.send(ScheduledEmailListRequest())
         try await MainActor.run {

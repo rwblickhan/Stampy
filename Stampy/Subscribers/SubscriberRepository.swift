@@ -28,7 +28,8 @@ class SubscriberRepository {
     private let apiClient: APIClient
 
     init() {
-        realm = try! Realm()
+        let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+        realm = try! Realm(configuration: configuration)
         apiClient = APIClient()
     }
 

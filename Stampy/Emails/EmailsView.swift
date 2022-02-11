@@ -100,7 +100,10 @@ struct EmailsView: View {
                     }
                 }
                 .onDelete(perform: { indexSet in
-                    print("\(indexSet)")
+                    for index in indexSet {
+                        let email = filteredScheduled[index]
+                        Task { try await emailRepo.deleteScheduled(email) }
+                    }
                 })
             }
         }

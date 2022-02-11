@@ -25,7 +25,7 @@ private struct SubscriberListRequest: APIRequest {
 
 class SubscriberRepository: Repository {
     func fetchSubscribers() async throws {
-        try await fetch(SubscriberListRequest(), onFetch: { realm, response in
+        try await fetch(SubscriberListRequest(), onResponse: { realm, response in
             realm.add(response.results, update: .all)
         })
     }

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SubscribersView: View {
     private let subscriberRepo = SubscriberRepository()
-    
+
     @ObservedResults(Subscriber.self) private var subscribers
     @AppStorage("api_key", store: UserDefaults.standard) private var persistedAPIKey: String?
     @State private var loadingState: LoadingState = .none
@@ -27,7 +27,7 @@ struct SubscribersView: View {
             .filter { $0.subscriberType == .spammy }
             .filter { queryString.isEmpty ? true : $0.email.lowercased().contains(queryString.lowercased()) }
     }
-    
+
     var body: some View {
         NavigationView {
             List {

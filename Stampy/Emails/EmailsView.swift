@@ -10,12 +10,12 @@ import SwiftUI
 
 struct EmailsView: View {
     private let emailRepo = EmailRepository()
-    
+
     @ObservedResults(Email.self) private var emails
     @AppStorage("api_key", store: UserDefaults.standard) private var persistedAPIKey: String?
     @State private var loadingState: LoadingState = .none
     @State private var queryString: String = ""
-    
+
     private var filteredEmails: [Email] {
         emails
             .filter { queryString.isEmpty ? true : $0.subject.lowercased().contains(queryString.lowercased()) }
@@ -74,15 +74,15 @@ struct EmailsView: View {
     private var archivesSection: some View {
         Section(header: Label("Archives", systemImage: "tray.full")) {
             ForEach(filteredEmails) { email in
-                    NavigationLink(destination: EmailView(email: email)) {
-                        LazyVStack(alignment: .leading) {
-                            Text(email.subject)
-                                .font(.headline)
-                            Text(email.publishDate.formatted())
-                                .font(.subheadline)
-                        }
+                NavigationLink(destination: EmailView(email: email)) {
+                    LazyVStack(alignment: .leading) {
+                        Text(email.subject)
+                            .font(.headline)
+                        Text(email.publishDate.formatted())
+                            .font(.subheadline)
                     }
                 }
+            }
         }
     }
 }

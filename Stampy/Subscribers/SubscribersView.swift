@@ -18,11 +18,11 @@ struct SubscribersView: View {
     private var regularSubscribers: [Subscriber] {
         subscribers.filter { $0.subscriberType == .regular }
     }
-    
+
     private var spammySubscribers: [Subscriber] {
         subscribers.filter { $0.subscriberType == .spammy }
     }
-    
+
     var body: some View {
         NavigationView {
             List {
@@ -48,7 +48,7 @@ struct SubscribersView: View {
             .navigationTitle("Subscribers")
         }
     }
-    
+
     private func fetchAll() async {
         do {
             hasSubscriberFetchError = false
@@ -71,17 +71,19 @@ struct SubscribersView: View {
             }
         }
     }
-    
+
     private var spammySubscribersSection: some View {
-        Section(header: Label("Spammy Subscribers (\(spammySubscribers.count))", systemImage: "person.crop.circle.badge.exclamationmark")) {
-            ForEach(spammySubscribers) { subscriber in
-                LazyVStack(alignment: .leading) {
-                    Text(subscriber.email)
-                        .font(.headline)
-                    Text("Subscribed since \(subscriber.creationDate.formatted())")
-                        .font(.subheadline)
+        Section(header: Label(
+            "Spammy Subscribers (\(spammySubscribers.count))",
+            systemImage: "person.crop.circle.badge.exclamationmark")) {
+                ForEach(spammySubscribers) { subscriber in
+                    LazyVStack(alignment: .leading) {
+                        Text(subscriber.email)
+                            .font(.headline)
+                        Text("Subscribed since \(subscriber.creationDate.formatted())")
+                            .font(.subheadline)
+                    }
                 }
             }
-        }
     }
 }

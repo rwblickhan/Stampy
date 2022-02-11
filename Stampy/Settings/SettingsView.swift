@@ -10,7 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage("api_key", store: UserDefaults.standard) private var persistedAPIKey: String?
     @State private var apiKey: String = ""
-    
+
     var body: some View {
         NavigationView {
             Form {

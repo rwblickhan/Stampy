@@ -23,26 +23,10 @@ private struct SubscriberListRequest: APIRequest {
     var method: HTTPMethod { .get }
 }
 
-class SubscriberRepository {
-    private let realm: Realm
-    private let apiClient: APIClient
-
-    init() {
-        let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-        realm = try! Realm(configuration: configuration)
-        apiClient = APIClient()
-    }
-
-    func fetchAll() async throws {
-        let response = try await apiClient.send(SubscriberListRequest())
-        try await MainActor.run {
-            try realm.write {
-                realm.add(response.results, update: .all)
-            }
-        }
-    }
-
-    func fetch(_ id: String) -> Subscriber? {
-        realm.objects(Subscriber.self).first(where: { $0.id == id })
+class SubscriberRepository: Repository {
+    func fetchSubscribers() async throws {
+        try await fetch(SubscriberListRequest(), onFetch: { realm, response in
+            realm.add(response.results, update: .all)
+        })
     }
 }

@@ -9,19 +9,20 @@ import Foundation
 import RealmSwift
 
 class Repository {
-    let realm: Realm
-    let apiClient: APIClient
+    private let realm: Realm
+    private let apiClient: APIClient
 
     init() {
-        let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: false)
+        let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
         realm = try! Realm(configuration: configuration)
         apiClient = APIClient()
     }
 
-    func makeRequest(_: APIRequest) {
+    func fetch<T: APIRequest>(_ request: T, onFetch: (Realm, T.Response) -> Void) async throws {
+        let response = try await apiClient.send(request)
         try await MainActor.run {
             try realm.write {
-                realm.add(response.results, update: .all)
+                onFetch(realm, response)
             }
         }
     }

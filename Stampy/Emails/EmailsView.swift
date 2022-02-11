@@ -99,6 +99,9 @@ struct EmailsView: View {
                         }
                     }
                 }
+                .onDelete(perform: { indexSet in
+                    print("\(indexSet)")
+                })
             }
         }
     }

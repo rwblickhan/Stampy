@@ -49,12 +49,14 @@ private struct EmailRequest: APIRequest {
 class EmailRepository: Repository {
     func fetchArchive() async throws {
         try await fetch(EmailListRequest(), onFetch: { realm, response in
+            realm.delete(realm.objects(Email.self).filter { $0.publishDate <= Date() })
             realm.add(response.results, update: .all)
         })
     }
 
     func fetchScheduled() async throws {
         try await fetch(ScheduledEmailListRequest(), onFetch: { realm, response in
+            realm.delete(realm.objects(Email.self).filter { $0.publishDate > Date() })
             realm.add(response.results, update: .all)
         })
     }

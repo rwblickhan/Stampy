@@ -10,11 +10,11 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage("api_key", store: UserDefaults.standard) private var persistedAPIKey: String?
     @State private var apiKey: String = ""
-
+    
     var body: some View {
         NavigationView {
             Form {
-                Section(header: credentialsHeader) {
+                Section(header: Label("Credentials", systemImage: "key")) {
                     if let persistedAPIKey = persistedAPIKey {
                         HStack {
                             Text("API Key: \(String(repeating: "*", count: persistedAPIKey.count))")
@@ -41,18 +41,5 @@ struct SettingsView: View {
                 }
             }.navigationTitle("Settings")
         }
-    }
-
-    private var credentialsHeader: some View {
-        HStack {
-            Image(systemName: "key")
-            Text("Credentials")
-        }
-    }
-}
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
     }
 }

@@ -45,7 +45,7 @@ struct EmailView: View {
                 index += 1
             })
 
-        return VStack {
+        return LazyVStack {
             ForEach(blocks) { block in
                 switch block {
                 case let .image(source, _, _): KFImage(URL(string: source ?? "")).resizable()

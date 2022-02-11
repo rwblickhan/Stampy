@@ -17,18 +17,17 @@ struct EmailsView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                List {
-//                    draftsSection
-//                    scheduledSection
-                    archivesSection
-                }.refreshable {
-                    await fetchAll()
-                }.onAppear {
-                    Task { await fetchAll() }
-                }
-                .navigationTitle("Emails")
+            List {
+                draftsSection
+                scheduledSection
+                archivesSection
+            }.refreshable {
+                await fetchAll()
+            }.onAppear {
+                Task { await fetchAll() }
             }
+            .listStyle(GroupedListStyle())
+            .navigationTitle("Emails")
         }
     }
 
@@ -42,37 +41,16 @@ struct EmailsView: View {
         }
     }
 
-    private var draftsHeader: some View {
-        HStack {
-            Image(systemName: "envelope")
-            Text("Drafts")
-        }
-    }
-
     private var draftsSection: some View {
-        Section(header: draftsHeader) {}
-    }
-
-    private var scheduledHeader: some View {
-        HStack {
-            Image(systemName: "tray.and.arrow.up")
-            Text("Scheduled Emails")
-        }
+        Section(header: Label("Drafts", systemImage: "envelope")) {}
     }
 
     private var scheduledSection: some View {
-        Section(header: scheduledHeader) {}
-    }
-
-    private var archivesHeader: some View {
-        HStack {
-            Image(systemName: "tray.full")
-            Text("Archives")
-        }
+        Section(header: Label("Scheduled Emails", systemImage: "tray.and.arrow.up")) {}
     }
 
     private var archivesSection: some View {
-        Section(header: archivesHeader) {
+        Section(header: Label("Archives", systemImage: "tray.full")) {
             switch (emails.isEmpty, hasEmailFetchError, persistedAPIKey == nil) {
             case (_, _, true):
                 Text("Add your Buttondown API key in settings, then pull to refresh here!")
@@ -83,7 +61,7 @@ struct EmailsView: View {
             case (false, _, false):
                 ForEach(emails.reversed()) { email in
                     NavigationLink(destination: EmailView(email: email)) {
-                        VStack(alignment: .leading) {
+                        LazyVStack(alignment: .leading) {
                             Text(email.subject)
                                 .font(.headline)
                             Text(email.publishDate.formatted())

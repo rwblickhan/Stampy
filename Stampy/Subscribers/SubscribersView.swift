@@ -18,21 +18,37 @@ struct SubscribersView: View {
     private var regularSubscribers: [Subscriber] {
         subscribers.filter { $0.subscriberType == .regular }
     }
-
+    
+    private var spammySubscribers: [Subscriber] {
+        subscribers.filter { $0.subscriberType == .spammy }
+    }
+    
     var body: some View {
         NavigationView {
-            VStack {
-                List {
+            List {
+                switch (subscribers.isEmpty, hasSubscriberFetchError, persistedAPIKey == nil) {
+                case (_, _, true):
+                    Text("Add your Buttondown API key in settings, then pull to refresh here!")
+                case (true, true, false):
+                    Text("Failed to retrieve subscribers; try pulling to refresh!")
+                case (true, false, false):
+                    ProgressView()
+                case (false, _, false):
                     regularSubscribersSection
-                }.refreshable {
-                    await fetchAll()
-                }.onAppear {
-                    Task { await fetchAll() }
-                }.navigationTitle("Subscribers")
+                    spammySubscribersSection
+                }
             }
+            .refreshable {
+                await fetchAll()
+            }
+            .onAppear {
+                Task { await fetchAll() }
+            }
+            .listStyle(GroupedListStyle())
+            .navigationTitle("Subscribers")
         }
     }
-
+    
     private func fetchAll() async {
         do {
             hasSubscriberFetchError = false
@@ -43,30 +59,27 @@ struct SubscribersView: View {
         }
     }
 
-    private var regularSubscribersHeader: some View {
-        HStack {
-            Image(systemName: "person.2")
-            Text("Regular Subscribers")
+    private var regularSubscribersSection: some View {
+        Section(header: Label("Regular Subscribers (\(regularSubscribers.count))", systemImage: "person.crop.circle")) {
+            ForEach(regularSubscribers) { subscriber in
+                LazyVStack(alignment: .leading) {
+                    Text(subscriber.email)
+                        .font(.headline)
+                    Text("Subscribed since \(subscriber.creationDate.formatted())")
+                        .font(.subheadline)
+                }
+            }
         }
     }
-
-    private var regularSubscribersSection: some View {
-        Section(header: regularSubscribersHeader) {
-            switch (regularSubscribers.isEmpty, hasSubscriberFetchError, persistedAPIKey == nil) {
-            case (_, _, true):
-                Text("Add your Buttondown API key in settings, then pull to refresh here!")
-            case (true, true, false):
-                Text("Failed to retrieve subscribers; try pulling to refresh!")
-            case (true, false, false):
-                ProgressView()
-            case (false, _, false):
-                ForEach(regularSubscribers) { subscriber in
-                    VStack(alignment: .leading) {
-                        Text(subscriber.email)
-                            .font(.headline)
-                        Text("Subscribed since \(subscriber.creationDate.formatted())")
-                            .font(.subheadline)
-                    }
+    
+    private var spammySubscribersSection: some View {
+        Section(header: Label("Spammy Subscribers (\(spammySubscribers.count))", systemImage: "person.crop.circle.badge.exclamationmark")) {
+            ForEach(spammySubscribers) { subscriber in
+                LazyVStack(alignment: .leading) {
+                    Text(subscriber.email)
+                        .font(.headline)
+                    Text("Subscribed since \(subscriber.creationDate.formatted())")
+                        .font(.subheadline)
                 }
             }
         }

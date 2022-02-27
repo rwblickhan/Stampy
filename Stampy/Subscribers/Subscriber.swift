@@ -33,3 +33,10 @@ class Subscriber: Object, Codable, Identifiable {
     @Persisted var notes: String
     @Persisted var subscriberType: SubscriberType
 }
+
+class Unsubscriber: Object, Codable, Identifiable {
+    @Persisted(primaryKey: true) var id: String
+    @Persisted var email: String
+    @Persisted var creationDate: Date
+    @Persisted var notes: String
+}

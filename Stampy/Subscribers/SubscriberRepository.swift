@@ -43,7 +43,7 @@ class SubscriberRepository: Repository {
             realm.add(response.results, update: .all)
         })
     }
-    
+
     func fetchUnsubscribers() async throws {
         try await fetch(UnsubscriberListRequest(), onResponse: { realm, response in
             realm.add(response.results, update: .all)

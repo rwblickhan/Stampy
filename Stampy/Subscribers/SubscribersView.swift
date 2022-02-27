@@ -100,7 +100,7 @@ struct SubscribersView: View {
                 }
             }
     }
-    
+
     private var unsubscribersSection: some View {
         Section(header: Label(
             "Unsubscribers (\(unsubscribers.count))",

@@ -12,6 +12,7 @@ struct SubscribersView: View {
     private let subscriberRepo = SubscriberRepository()
 
     @ObservedResults(Subscriber.self) private var subscribers
+    @ObservedResults(Unsubscriber.self) private var unsubscribers
     @AppStorage("api_key", store: UserDefaults.standard) private var persistedAPIKey: String?
     @State private var loadingState: LoadingState = .none
     @State private var queryString: String = ""
@@ -45,6 +46,7 @@ struct SubscribersView: View {
                 } else {
                     regularSubscribersSection
                     spammySubscribersSection
+                    unsubscribersSection
                 }
             }
             .refreshable {
@@ -63,6 +65,7 @@ struct SubscribersView: View {
         do {
             loadingState = .loading
             try await subscriberRepo.fetchSubscribers()
+            try await subscriberRepo.fetchUnsubscribers()
             loadingState = .none
         } catch {
             print("\(error)")
@@ -88,6 +91,21 @@ struct SubscribersView: View {
             "Spammy Subscribers (\(spammySubscribers.count))",
             systemImage: "person.crop.circle.badge.exclamationmark")) {
                 ForEach(spammySubscribers) { subscriber in
+                    LazyVStack(alignment: .leading) {
+                        Text(subscriber.email)
+                            .font(.headline)
+                        Text("Subscribed since \(subscriber.creationDate.formatted())")
+                            .font(.subheadline)
+                    }
+                }
+            }
+    }
+    
+    private var unsubscribersSection: some View {
+        Section(header: Label(
+            "Unsubscribers (\(unsubscribers.count))",
+            systemImage: "person.crop.circle.badge.xmark")) {
+                ForEach(unsubscribers) { subscriber in
                     LazyVStack(alignment: .leading) {
                         Text(subscriber.email)
                             .font(.headline)
